@@ -20,3 +20,4 @@ WCSTool é uma ferramenta que está (versão 0.2 atual) e sempre estará em apri
 * Relatório de Métricas
 * Manutenção de intenções e seus exemplos
 * Manutenção de entidades e seus exemplos
+* Disponível em container [Docker](https://hub.docker.com/r/nborges/chattools/)

@@ -231,7 +231,7 @@ app.controller("chat", ['$scope', '$timeout', '$http', function ($scope, $timeou
 
 
 	function enviaMsg(mensagem, contexto) {
-		if (mensagem.trim() != '') {
+		if (mensagem == null || mensagem.trim() != '') {
 			var objPost = {
 				url_api: $scope.api_url,
 				user: $scope.user,

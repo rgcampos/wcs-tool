@@ -106,7 +106,7 @@ module.exports = {
                     var conversation_id = req.body.conversation_id;
                     var feedbackAtendimento = req.body.tipo;
                     var intencao = req.body.intencao || {};
-                    var usuario = (req.session.user) ? req.session.user.email : 'user@wcstool.com.br';
+                    var usuario = (req.session.user) ? req.session.user.email : 'html@chattools.com';
 
                     var objInsert = {
                         workspace_id: workspace_id,
@@ -154,7 +154,7 @@ module.exports = {
                     var conversation_id = req.body.conversation_id;
                     var texto = req.body.mensagem;
                     var tipo = req.body.tipo;
-                    var user = (req.session.user) ? req.session.user.email : 'user@wcstool.com.br';
+                    var user = (req.session.user) ? req.session.user.email : 'html@chattools.com';
                     var intencao = req.body.intents;
 
                     Historico.create({

@@ -1,0 +1,194 @@
+<div class="container" ng-controller="configGestaoUsuario" ng-init="load()">
+    <ol class="breadcrumb">
+        <li><a href="#">Configuração</a></li>
+        <li class="active">Gestão de Usuário</li>
+    </ol>
+
+    <div class="alert alert-success alert-dismissible ng-cloak" role="alert" ng-show="operacaoSucesso">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong>Sucesso!</strong> Operação realizada.
+    </div>
+    <div class="alert alert-danger alert-dismissible ng-cloak" role="alert" ng-show="operacaoFalha">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong>Erro!</strong> Falha na operação.
+    </div>
+    <form method="POST" name="form" ng-submit="formSubmit()">
+        <input type="hidden" name="formData.record_id" id="formData.record_id" ng-model="formData.record_id" value="{{formData.record_id}}">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <section class="col-xs-12 col-sm-4 col-md-4 line-form border-rigth">
+                    <div class="form-group">
+                        <label class="control-label req" for="formData.nome_usuario">Nome</label>
+                        <input type="text" class="form-control" name="formData.nome_usuario" id="formData.nome_usuario" ng-model="formData.nome_usuario"
+                            required>
+                    </div>
+                </section>
+                <section class="col-xs-12 col-sm-4 col-md-4 line-form border-rigth">
+                    <div class="form-group">
+                        <label class="control-label req" for="formData.email_usuario">Usuário (Email)</label>
+                        <input type="email" class="form-control" name="formData.email_usuario" id="formData.email_usuario" ng-model="formData.email_usuario"
+                            required>
+                    </div>
+                </section>
+                <section class="col-xs-12 col-sm-4 col-md-4 line-form">
+                    <div class="form-group">
+                        <label class="control-label req" for="formData.nivel_usuario">Nível</label>
+                        <select class="form-control" name="formData.nivel_usuario" id="formData.nivel_usuario" ng-model="formData.nivel_usuario"
+                            required>
+                            <option value="0">Usuário</option>
+                            <option value="1">Treinador</option>
+                            <option value="2">Administrador</option>
+                        </select>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <section class="col-xs-12 col-sm-4 col-md-4 line-form border-rigth">
+                    <div class="form-group">
+                        <label class="control-label req" for="formData.status_usuario">Status</label>
+                        <select class="form-control" name="formData.status_usuario" id="formData.status_usuario" ng-model="formData.status_usuario"
+                            required>
+                            <option value="0">Inativo</option>
+                            <option value="1">Ativo</option>
+                        </select>
+                    </div>
+                </section>
+                <section class="col-xs-12 col-sm-4 col-md-4 line-form border-rigth">
+                    <div class="form-group">
+                        <label class="control-label req" for="formData.senha_usuario">Senha</label>
+                        <input type="password" class="form-control" name="formData.senha_usuario" id="formData.senha_usuario" ng-model="formData.senha_usuario"
+                            required>
+                    </div>
+                </section>
+                <section class="col-xs-12 col-sm-4 col-md-4 line-form">
+                    <div class="form-group">
+                        <label class="control-label req" for="formData.confirma_senha_usuario">Confirmar Senha</label>
+                        <input type="password" class="form-control" name="formData.confirma_senha_usuario" id="formData.confirma_senha_usuario" ng-model="formData.confirma_senha_usuario"
+                            required>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <section class="col-xs-12 col-sm-3 col-md-3 line-form">
+                    &nbsp;
+                </section>
+                <section class="col-xs-12 col-sm-3 col-md-3 line-form">
+                    <div class="form-group">
+                        <button class="btn btn-primary btn-block" type="submit" id="btnCriar" name="btnCriar">Novo Usuário</button>
+                    </div>
+                </section>
+                <section class="col-xs-12 col-sm-3 col-md-3 line-form">
+                    <button class="btn btn-danger btn-block" type="reset" id="btnLimpar" name="btnLimpar">Limpar</button>
+                </section>
+                <section class="col-xs-12 col-sm-3 col-md-3">
+                    &nbsp;
+                </section>
+            </div>
+        </div>
+    </form>
+
+    <div class="modal fade bs-example-modal-lg" id="modalPersonality" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    Gráficos do Personality Insight
+                </div>
+                <div id="conteudoModalPersonality" class="modal-body">
+                    <div id="divLoading">
+                        Carregando dados do Personality Insight, por favor aguarde...
+                    </div>
+                    <div id="divGraph">
+                        <div id="divPersonality">
+                            <span><b>Personalidade</b></span><br><br>
+                            <canvas id="myChartPersonality" width="400" height="150"></canvas><br>
+
+                            <span data-chart="divChartOpenness">Gráfico - Abertura</span><br>
+                            <div id="divChartOpenness" class="chartHidden">
+                                <canvas id="myChartOpenness" width="400" height="150"></canvas>
+                            </div><br>
+
+                            <span data-chart="divChartConscientiousness">Gráfico - Escrupulosidade</span><br>
+                            <div id="divChartConscientiousness" class="chartHidden">
+                                <canvas id="myChartConscientiousness" width="400" height="150"></canvas>
+                            </div><br>
+
+                            <span data-chart="divChartIntroversionExtraversion">Gráfico - Extroversão</span><br>
+                            <div id="divChartIntroversionExtraversion" class="chartHidden">
+                                <canvas id="myChartIntroversionExtraversion" width="400" height="150"></canvas>
+                            </div><br>
+
+                            <span data-chart="divChartAgreeableness">Gráfico - Amabilidade</span><br>
+                            <div id="divChartAgreeableness" class="chartHidden">
+                                <canvas id="myChartAgreeableness" width="400" height="150"></canvas>
+                            </div><br>
+
+                            <span data-chart="divChartEmotional">Gráfico - Faixa Emocional</span><br>
+                            <div id="divChartEmotional" class="chartHidden">
+                                <canvas id="myChartEmotional" width="400" height="150"></canvas>
+                            </div><br>
+                        </div>
+                        <div id="divConsumerNeeds">
+                            <span><b>Necessidades</b></span><br>
+                            <canvas id="myChartConsumerNeeds" width="400" height="150"></canvas>
+                        </div>
+                        <div id="divValues">
+                            <span><b>Valores</b></span><br>
+                            <canvas id="myChartValues" width="400" height="150"></canvas>
+                        </div>
+                    </div>
+                    <div id="divMessageNotFound">
+                        Desculpe, mas o usuário selecionado não possuí informações para a análise do Personality Insight.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <table id="listaUsuario" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Usuário</th>
+                        <th>Nível</th>
+                        <th>Ativo</th>
+                        <th>P.I.</th>
+                        <th>#</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Usuário</th>
+                        <th>Nível</th>
+                        <th>Ativo</th>
+                        <th>P.I.</th>
+                        <th>#</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    <tr ng-repeat="x in ConteudoGridUsuarios track by $index">
+                        <td>{{x.NomeUsuario}}</td>
+                        <td>{{x.Usuario}}</td>
+                        <td>{{x.NivelPermissao}}</td>
+                        <td>{{x.Ativo}}</td>
+                        <td style="text-align: center;">
+                            <img src="/images/personalityinsight.png" data-toggle="modal" data-target="#modalPersonality" alt="Visualizar Personality Insight"
+                                title="Visualizar Personality Insight" class="pointer" style="width: 20px; height: 20px;" ng-click="exibirInsight(x.Usuario);">
+                        </td>
+                        <td style="text-align: center;"><img src="/images/data_delete.png" alt="Apagar usuário" title="Apagar usuário" class="pointer" style="width: 20px; height: 20px;"
+                                ng-click="apagarUsuario(x.ID);"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

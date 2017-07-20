@@ -1,0 +1,145 @@
+<div class="container" ng-controller="corpus_entidade" ng-init="load()">
+    <ol class="breadcrumb">
+        <li><a href="#">Corpus</a></li>
+        <li class="active">Entidade</li>
+    </ol>
+    
+    <div class="modal fade bs-example-modal-lg" id="modalEntidade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content custom-height-modal">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="gridSystemModalLabel">Entidade</h4>
+                </div>
+                <div id="conteudoModalEntidade" class="modal-body">
+                    <table id="dialogoEntidade" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th>
+                                    {{entity}}
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <form method="POST" ng-submit="processFormExample()">
+                                        <div class="panel-body">
+                                            <section class="col-xs-12 col-sm-8 col-md-8">
+                                                <input class="form-control" name="formDataExemplo.value" id="formDataExemplo.value" ng-model="formDataExemplo.value" type="text"
+                                                    placeholder="Valor" style="margin-bottom: 5px; margin-top: 5px;">
+                                                <input class="form-control" name="formDataExemplo.synonyms" id="formDataExemplo.synonyms" ng-model="formDataExemplo.synonyms"
+                                                    type="text" placeholder="Sinônimos" style="margin-bottom: 5px; margin-top: 5px;">
+                                                <input name="formDataExemplo.entity" id="formDataExemplo.entity" ng-model="formDataExemplo.entity" type="hidden">
+                                            </section>
+                                            <section class="col-xs-12 col-sm-4 col-md-4">
+                                                <input type="submit" class="btn btn-primary btn-block" value="Criar/Alterar Valor" id="btnCriarValor" name="btnCriarValor"
+                                                    style="margin-top: 5px;">
+                                                <div id="loading" class="ng-cloak">
+                                                    <img src="/images/ajax-loader.gif" alt="Carregando..." title="Carregando...">
+                                                </div>
+                                            </section>
+                                        </div>
+                                    </form>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="row" style="text-align: center;" ng-show="mostraLoaderExemplo">
+                                        <img src="/images/preload.gif" alt="Carregando..." title="Carregando..." style="height: 30px;">
+                                    </div>
+                                    <table id="tabelaEntidadeExemplo" class="table table-striped table-bordered" cellspacing="0" width="100%" ng-show="!mostraLoaderExemplo">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Valor</th>
+                                                <th>Sinônimos</th>
+                                                <th>Data Criação</th>
+                                            </tr>
+                                        </thead>
+                                        <tfoot>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Valor</th>
+                                                <th>Sinônimos</th>
+                                                <th>Data Criação</th>
+                                            </tr>
+                                        </tfoot>
+                                        <tbody>
+                                            <tr ng-repeat="x in dadosEntidadeExemplo">
+                                                <td class="text-center">
+                                                    <img src="/images/data_edit.png" alt="Editar valor" title="Editar valor" class="imgModalHistorico" ng-click="editarExemplo(x.value, x.synonyms.trim());">&nbsp;&nbsp;
+                                                    <img src="/images/data_delete.png" alt="Excluir valor" title="Excluir valor" class="imgModalHistorico" ng-click="excluirExemplo(x.value.trim());">
+                                                </td>
+                                                <td>{{x.value}}</td>
+                                                <td>{{x.synonyms.trim()}}</td>
+                                                <td style="text-align: center;">{{x.created | date: 'dd/MM/yyyy HH:mm:ss'}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <form method="POST" ng-submit="processForm()">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <section class="col-xs-12 col-sm-6 col-md-6 border-rigth">
+                    <input class="form-control" name="formData.entity" id="formData.entity" ng-model="formData.entity" type="text" placeholder="Entidade"
+                        style="margin-bottom: 5px; margin-top: 5px;">
+                    <input class="form-control" name="formData.description" id="formData.description" ng-model="formData.description" type="text"
+                        placeholder="Descrição" style="margin-bottom: 5px; margin-top: 5px;">
+                </section>
+                <section class="col-xs-12 col-sm-6 col-md-6">
+                    <div class="form-group">
+                        <label class="control-label" for="btnCriarEntidade">&nbsp;</label>
+                        <input type="submit" class="btn btn-primary btn-block" value="Criar Entidade" id="btnCriarEntidade" name="btnCriarEntidade">
+                    </div>
+                </section>
+            </div>
+        </div>
+    </form>
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="row" style="text-align: center;" ng-show="mostraLoaderEntidade">
+                <img src="/images/preload.gif" alt="Carregando..." title="Carregando..." style="height: 30px;">
+            </div>
+            <table id="tabelaEntidade" class="table table-striped table-bordered ng-cloak" cellspacing="0" width="100%" ng-show="!mostraLoaderEntidade">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Entidade</th>
+                        <th>Descrição</th>
+                        <th>Data Criação</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>#</th>
+                        <th>Entidade</th>
+                        <th>Descrição</th>
+                        <th>Data Criação</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    <tr ng-repeat="x in dadosEntidade">
+                        <td class="text-center">
+                            <img src="/images/data_view.png" alt="Visualizar Exemplos" title="Visualizar Exemplos" data-toggle="modal" data-target="#modalEntidade" class="imgModalHistorico"
+                                ng-click="abrirModalEntidade(x.entity);">&nbsp;&nbsp;
+                            <img src="/images/data_delete.png" alt="Excluir Entidade" title="Excluir Entidade" class="imgModalHistorico" ng-click="excluirEntidade(x.entity);">
+                        </td>
+                        <td>{{x.entity}}</td>
+                        <td>{{x.description}}</td>
+                        <td style="text-align: center;">{{x.created | date: 'dd/MM/yyyy HH:mm:ss'}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

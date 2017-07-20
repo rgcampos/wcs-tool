@@ -1,0 +1,33 @@
+<div class="container" ng-controller="logUser" ng-init="load()">
+    <h2>Log</h2>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="row" style="text-align: center;" ng-show="mostraLoader">
+                <img src="/images/preload.gif" alt="Carregando..." title="Carregando..." style="height: 30px;">
+            </div>
+            <table id="tableLog" class="table table-striped table-bordered ng-cloak" cellspacing="0" width="100%" ng-show="!mostraLoader">
+                <thead>
+                    <tr>
+                        <th>Usuário</th>
+                        <th>Descrição</th>
+                        <th>Data Criação</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>Usuário</th>
+                        <th>Descrição</th>
+                        <th>Data Criação</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    <tr ng-repeat="x in dadosLog">
+                        <td>{{x.info.user}}</td>
+                        <td>{{x.info.action}}</td>
+                        <td>{{x.createdAt | date: 'dd/MM/yyyy HH:mm:ss'}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

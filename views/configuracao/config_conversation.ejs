@@ -1,0 +1,150 @@
+<div class="container" ng-controller="configConversation" ng-init="load()">
+    <ol class="breadcrumb">
+        <li><a href="#">Configuração</a></li>
+        <li class="active">Watson Conversation</li>
+    </ol>
+
+    <div class="alert alert-success alert-dismissible ng-cloak" role="alert" ng-show="operacaoSucesso">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong>Sucesso!</strong> Operação realizada.
+    </div>
+
+    <div class="alert alert-danger alert-dismissible ng-cloak" role="alert" ng-show="operacaoFalha">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong>Erro!</strong> Falha na operação.
+    </div>
+
+    <form method="POST" name="form" ng-submit="formSubmit()">
+        <input type="hidden" name="formData.record_id" id="formData.record_id" ng-model="formData.record_id" value="{{record_id}}">
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <section class="col-xs-12 col-sm-3 col-md-3 line-form border-rigth">
+                    <div class="form-group">
+                        <label class="control-label req" for="formData.url_api">URL API</label>
+                        <input type="url" class="form-control" pattern="https?://.+" name="formData.url_api" id="formData.url_api" ng-model="formData.url_api"
+                            required />
+                    </div>
+                </section>
+                <section class="col-xs-12 col-sm-3 col-md-3 line-form border-rigth">
+                    <div class="form-group">
+                        <label class="control-label req" for="formData.user_bluemix">Usuário Bluemix</label>
+                        <input type="text" class="form-control" name="formData.user_bluemix" id="formData.user_bluemix" ng-model="formData.user_bluemix"
+                            required />
+                    </div>
+                </section>
+                <section class="col-xs-12 col-sm-3 col-md-3 line-form border-rigth">
+                    <div class="form-group">
+                        <label class="control-label req" for="formData.token_bluemix">Token</label>
+                        <input type="text" class="form-control" name="formData.token_bluemix" id="formData.token_bluemix" ng-model="formData.token_bluemix"
+                            required />
+                    </div>
+                </section>
+                <section class="col-xs-12 col-sm-3 col-md-3 line-form">
+                    <div class="form-group">
+                        <label class="control-label req" for="formData.workspace_id">Workspace ID</label>
+                        <input type="text" class="form-control" name="formData.workspace_id" id="formData.workspace_id" ng-model="formData.workspace_id"
+                            required />
+                    </div>
+                </section>
+            </div>
+        </div>
+
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <section class="col-xs-12 col-sm-3 col-md-3 line-form border-rigth">
+                    <div class="form-group">
+                        <label class="control-label req" for="formData.version_date">Versão</label>
+                        <input type="text" class="form-control" name="formData.version_date" id="formData.version_date" ng-model="formData.version_date"
+                            required />
+                    </div>
+                </section>
+                <section class="col-xs-12 col-sm-3 col-md-3 line-form border-rigth">
+                    <div class="form-group">
+                        <label class="control-label" for="formData.save_history">Salvar Histórico</label>
+                        <select class="form-control" id="formData.save_history" name="formData.save_history" ng-model="formData.save_history">
+                            <option value="0" selected="selected">Não</option>
+                            <option value="1">Sim</option>
+                        </select>
+                    </div>
+                </section>
+                <section class="col-xs-12 col-sm-3 col-md-3 line-form border-rigth">
+                    <div class="form-group">
+                        <label class="control-label" for="formData.show_feedback">Mostrar Feedback</label>
+                        <select class="form-control" id="formData.show_feedback" name="formData.show_feedback" ng-model="formData.show_feedback">
+                            <option value="0" selected="selected">Não</option>
+                            <option value="1">Sim</option>
+                        </select>
+                    </div>
+                </section>
+                <section class="col-xs-12 col-sm-3 col-md-3 line-form">
+                    <div class="form-group">
+                        <label class="control-label" for="formData.show_emoji">Mostrar Emoji</label>
+                        <select class="form-control" id="formData.show_emoji" name="formData.show_emoji" ng-model="formData.show_emoji">
+                            <option value="0" selected="selected">Não</option>
+                            <option value="1">Sim</option>
+                        </select>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <section class="col-xs-12 col-sm-3 col-md-3 line-form border-rigth">
+                    <div class="form-group">
+                        <label class="control-label" for="formData.evaluation_message">Mensagem de avaliação</label>
+                        <input type="text" class="form-control" name="formData.evaluation_message" id="formData.evaluation_message" ng-model="formData.evaluation_message"
+                            required />
+                    </div>
+                </section>
+                <section class="col-xs-12 col-sm-3 col-md-3 line-form border-rigth">
+                    <div class="form-group">
+                        <label class="control-label" for="formData.end_conversation_message">Mensagem final de conversa</label>
+                        <input type="text" class="form-control" name="formData.end_conversation_message" id="formData.end_conversation_message" ng-model="formData.end_conversation_message"
+                            required />
+                    </div>
+                </section>
+                <section class="col-xs-12 col-sm-3 col-md-3 line-form border-rigth">
+                    <div class="form-group">
+                        <label class="control-label" for="formData.conversation_start">Existe Conversation_Start?</label>
+                        <select class="form-control" id="formData.conversation_start" name="formData.conversation_start" ng-model="formData.conversation_start">
+                            <option value="0" selected="selected">Não</option>
+                            <option value="1">Sim</option>
+                        </select>
+                    </div>
+                </section>
+                <section class="col-xs-12 col-sm-3 col-md-3 line-form">
+                    <div class="form-group">
+                        <label class="control-label" for="formData.external_token">Token externo</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="formData.external_token" id="formData.external_token" ng-model="formData.external_token"
+                                required />
+                            <span class="input-group-btn"><button class="btn btn-info" type="button" ng-click="generateToken()">Gerar</button></span>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <section class="col-xs-12 col-sm-3 col-md-3 line-form">
+                    &nbsp;
+                </section>
+                <section class="col-xs-12 col-sm-3 col-md-3 line-form">
+                    <button class="btn btn-primary btn-block" type="submit" id="btnSalvar" name="btnSalvar">Salvar</button>
+                </section>
+                <section class="col-xs-12 col-sm-3 col-md-3 line-form">
+                    <button class="btn btn-danger btn-block" type="reset" id="btnLimpar" name="btnLimpar">Limpar</button>
+                </section>
+                <section class="col-xs-12 col-sm-3 col-md-3 line-form">
+                    &nbsp;
+                </section>
+            </div>
+        </div>
+
+    </form>
+</div>

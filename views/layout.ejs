@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        Watson Conversation Service Tool
+    </title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <link rel="apple-touch-icon" sizes="57x57" href="/images/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/images/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/images/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/images/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/images/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/images/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/images/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/images/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/images/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/images/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/images/favicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/images/favicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
+
+    <!--STYLES-->
+    <link rel="stylesheet" href="/styles/01_dependencias/01_bootstrap.min.css">
+    <link rel="stylesheet" href="/styles/01_dependencias/02_dataTables.bootstrap.min.css">
+    <link rel="stylesheet" href="/styles/01_dependencias/03_buttons.dataTables.min.css">
+    <link rel="stylesheet" href="/styles/01_dependencias/04_angular-material.css">
+    <link rel="stylesheet" href="/styles/02_geral/01_config.css">
+    <link rel="stylesheet" href="/styles/02_geral/02_jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" href="/styles/02_geral/03_config_gestaousuarios.css">
+    <!--STYLES END-->
+
+</head>
+
+<body ng-app="chatBot">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+                    aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          </button>
+                <a class="navbar-brand" style="margin-top: -10px;" href="/"><img src="/images/watson.png" alt="ChatBot Tools" title="ChatBot Tools"></a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <toolbar>
+                </toolbar>
+            </div>
+        </div>
+    </nav>
+    <%- body %>
+
+
+        <!--TEMPLATES-->
+        <script type="text/javascript" src="/jst.js"></script>
+        <!--TEMPLATES END-->
+
+
+        <!--SCRIPTS-->
+        <script src="/js/dependencies/sails.io.js"></script>
+        <script src="/js/dependencies/external/01_jquery-3.1.1.min.js"></script>
+        <script src="/js/dependencies/external/02_bootstrap.min.js"></script>
+        <script src="/js/dependencies/external/03_fontawesome.js"></script>
+        <script src="/js/dependencies/external/04_jquery.dataTables.min.js"></script>
+        <script src="/js/dependencies/external/05_dataTables.bootstrap.min.js"></script>
+        <script src="/js/dependencies/external/06_dataTables.buttons.min.js"></script>
+        <script src="/js/dependencies/external/07_buttons.flash.min.js"></script>
+        <script src="/js/dependencies/external/08_jszip.min.js"></script>
+        <script src="/js/dependencies/external/09_pdfmake.min.js"></script>
+        <script src="/js/dependencies/external/10_vfs_fonts.js"></script>
+        <script src="/js/dependencies/external/11_buttons.html5.min.js"></script>
+        <script src="/js/dependencies/external/12_buttons.print.min.js"></script>
+        <script src="/js/dependencies/external/13_moment.js"></script>
+        <script src="/js/dependencies/external/14_Chart.min.js"></script>
+        <script src="/js/dependencies/external/15_highcharts.js"></script>
+        <script src="/js/dependencies/external/16_Chart.Utils.js"></script>
+        <script src="/js/dependencies/angular/main/angular.js"></script>
+        <script src="/js/dependencies/angular/main/mainAngular.js"></script>
+        <script src="/js/dependencies/angular/main/mainUtils.js"></script>
+        <script src="/js/dependencies/angular/controller/acuracia_bleu.js"></script>
+        <script src="/js/dependencies/angular/controller/acuracia_experimento.js"></script>
+        <script src="/js/dependencies/angular/controller/acuracia_turing.js"></script>
+        <script src="/js/dependencies/angular/controller/authenticate.js"></script>
+        <script src="/js/dependencies/angular/controller/backup.js"></script>
+        <script src="/js/dependencies/angular/controller/chat.js"></script>
+        <script src="/js/dependencies/angular/controller/coleta.js"></script>
+        <script src="/js/dependencies/angular/controller/config_conversation.js"></script>
+        <script src="/js/dependencies/angular/controller/config_gestaousuario.js"></script>
+        <script src="/js/dependencies/angular/controller/config_mail.js"></script>
+        <script src="/js/dependencies/angular/controller/config_nlc.js"></script>
+        <script src="/js/dependencies/angular/controller/config_personalityinsights.js"></script>
+        <script src="/js/dependencies/angular/controller/config_toneanalyzer.js"></script>
+        <script src="/js/dependencies/angular/controller/corpus_entidade.js"></script>
+        <script src="/js/dependencies/angular/controller/corpus_intencao.js"></script>
+        <script src="/js/dependencies/angular/controller/debug.js"></script>
+        <script src="/js/dependencies/angular/controller/feedback.js"></script>
+        <script src="/js/dependencies/angular/controller/historico.js"></script>
+        <script src="/js/dependencies/angular/controller/home.js"></script>
+        <script src="/js/dependencies/angular/controller/log.js"></script>
+        <script src="/js/dependencies/angular/controller/menu.js"></script>
+        <script src="/js/dependencies/angular/controller/rel_confidencia_baixa.js"></script>
+        <script src="/js/dependencies/angular/controller/rel_metrica.js"></script>
+        <script src="/js/dependencies/angular/controller/rel_pergunta_resposta.js"></script>
+        <script src="/js/dependencies/angular/controller/rel_utilizacao_satisfacao.js"></script>
+        <script src="/js/dependencies/angular/material/01_angular-animate.min.js"></script>
+        <script src="/js/dependencies/angular/material/02_angular-aria.min.js"></script>
+        <script src="/js/dependencies/angular/material/03_angular-material.js"></script>
+        <script src="/js/dependencies/angular/material/04_angular-route.min.js"></script>
+        <script src="/js/dependencies/angular/material/05_svg-assets-cache.js"></script>
+        <script src="/js/jquery.mCustomScrollbar.js"></script>
+        <script src="/js/personality-insight-chart.js"></script>
+        <script src="/js/rel-utlizacao-satisfacao.js"></script>
+        <!--SCRIPTS END-->
+</body>
+
+</html>

@@ -1,0 +1,64 @@
+<div class="container" ng-controller="configToneAnalyzer" ng-init="load()">
+    <ol class="breadcrumb">
+        <li><a href="#">Configuração</a></li>
+        <li class="active">Watson Tone Analyzer</li>
+    </ol>
+
+    <div class="alert alert-success alert-dismissible ng-cloak" role="alert" ng-show="operacaoSucesso">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong>Sucesso!</strong> Operação realizada.
+    </div>
+    <div class="alert alert-danger alert-dismissible ng-cloak" role="alert" ng-show="operacaoFalha">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong>Erro!</strong> Falha na operação.
+    </div>
+
+    <form name="formData" method="POST" ng-submit="formSubmit()">
+        <input type="hidden" name="record_id" id="record_id" ng-model="record_id" value="{{record_id}}">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <section class="col-xs-12 col-sm-3 col-md-3 line-form border-rigth">
+                    <div class="form-group">
+                        <label class="control-label req" for="url_api">URL API</label>
+                        <input type="url" class="form-control" pattern="https?://.+" name="url_api" id="url_api" ng-model="url_api" required />
+                    </div>
+                </section>
+                <section class="col-xs-12 col-sm-3 col-md-3 line-form border-rigth">
+                    <div class="form-group">
+                        <label class="control-label req" for="version_date">Versão</label>
+                        <input type="text" class="form-control" name="version_date" id="version_date" ng-model="version_date" required />
+                    </div>
+                </section>
+                <section class="col-xs-12 col-sm-3 col-md-3 line-form border-rigth">
+                    <div class="form-group">
+                        <label class="control-label req" for="user_bluemix">Usuário Bluemix</label>
+                        <input type="text" class="form-control" name="user_bluemix" id="user_bluemix" ng-model="user_bluemix" required />
+                    </div>
+                </section>
+                <section class="col-xs-12 col-sm-3 col-md-3 line-form">
+                    <div class="form-group">
+                        <label class="control-label req" for="token_bluemix">Token</label>
+                        <input type="text" class="form-control" name="token_bluemix" id="token_bluemix" ng-model="token_bluemix" required />
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <section class="col-xs-12 col-sm-4 col-md-3 line-form">
+                    &nbsp;
+                </section>
+                <section class="col-xs-12 col-sm-4 col-md-3 line-form">
+                    <button class="btn btn-primary btn-block" type="submit" id="btnSalvar" name="btnSalvar">Salvar</button>
+                </section>
+                <section class="col-xs-12 col-sm-4 col-md-3 line-form">
+                    <button class="btn btn-danger btn-block" type="reset" id="btnLimpar" name="btnLimpar">Limpar</button>
+                </section>
+                <section class="col-xs-12 col-sm-4 col-md-3 line-form">
+                    &nbsp;
+                </section>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,52 @@
+<div class="container" ng-controller="coleta" ng-init="load()">
+    <ol class="breadcrumb">
+        <li><a href="#">Conversação</a></li>
+        <li class="active">Coleta</li>
+    </ol>
+    <span style="font-size: small; color: red;">em construção</span>
+
+    <div class="alert alert-success alert-dismissible ng-cloak" role="alert" ng-show="operacaoSucesso">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong>Sucesso!</strong> Operação realizada.
+    </div>
+    <div class="alert alert-danger alert-dismissible ng-cloak" role="alert" ng-show="operacaoFalha">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong>Erro!</strong> Falha na operação.
+    </div>
+
+    <form method="POST" ng-submit="formSubmit()">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <section class="col-xs-12 col-sm-6 col-md-6 line-form border-rigth">
+                    <div class="form-group">
+                        <label class="control-label req" for="formData.pergunta">Pergunta</label>
+                        <input class="form-control" name="formData.pergunta" id="formData.pergunta" ng-model="formData.pergunta" type="text" required>
+                    </div>
+                </section>
+                <section class="col-xs-12 col-sm-6 col-md-6 line-form">
+                    <div class="form-group">
+                        <label class="control-label req" for="formData.assunto">Assunto</label>
+                        <input class="form-control" name="formData.assunto" id="formData.assunto" ng-model="formData.assunto" type="text" required>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <section class="col-xs-12 col-sm-3 col-md-3 line-form">
+                    &nbsp;
+                </section>
+                <section class="col-xs-12 col-sm-3 col-md-3 line-form">
+                    <button class="btn btn-primary btn-block" type="submit" id="btnSalvar" name="btnSalvar">Salvar</button>
+                </section>
+                <section class="col-xs-12 col-sm-3 col-md-3 line-form">
+                    <button class="btn btn-danger btn-block" type="reset" id="btnLimpar" name="btnLimpar">Limpar</button>
+                </section>
+                <section class="col-xs-12 col-sm-3 col-md-3 line-form">
+                    &nbsp;
+                </section>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,46 @@
+<div class="container">
+	<h3 class="form-signin-heading">Cadastro de Usuário</h3>
+	<form name="formData" novalidate>
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<section class="col-xs-12 col-sm-4 col-md-4 line-form border-rigth">
+					<label class="control-label" for="username">Usuário</label>
+					<input type="text" class="form-control" name="username" id="username" placeholder="Usuario" required="" autofocus="" />
+				</section>
+				<section class="col-xs-12 col-sm-4 col-md-4 line-form border-rigth">
+					<label class="control-label" for="email">E-mail</label>
+					<input type="email" class="form-control" name="email" id="email" placeholder="E-mail" required="" autofocus="" />
+				</section>
+				<section class="col-xs-12 col-sm-4 col-md-4 line-form">
+					<div class="form-group">
+						<label class="control-label" for="mode">Nível</label>
+						<select class="form-control" name="mode" id="mode" ng-model="mode">
+                            <option value="1" selected="selected">Usuário</option>
+                            <option value="2">Treinador</option>
+                            <option value="3">Administrador</option>
+                        </select>
+					</div>
+				</section>
+			</div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<section class="col-xs-12 col-sm-4 col-md-4 line-form">
+					<label class="control-label" for="senha">Senha</label>
+					<input type="password" class="form-control" name="senha" id="senha" ng-model="senha" placeholder="Senha" required="" />
+				</section>
+				<section class="col-xs-12 col-sm-4 col-md-4 line-form">
+					<label class="control-label" for="confirmaSenha">Confirmação senha</label>
+					<input type="password" class="form-control" name="confirmaSenha" id="confirmaSenha" ng-model="confirmaSenha" ng-compare-to="senha"
+					 placeholder="Confirmação senha" required />
+					<div ng-show="confirmaSenha.$invalid.compareTo">Confirmação de senha incorreta as.</div>
+					<div ng-show="confirmaSenha.$error.compareTo">Confirmação de senha incorreta as.</div>
+				</section>
+				<section class="col-xs-12 col-sm-4 col-md-4 line-form border-rigth">
+					<label class="control-label" for="buscar">&nbsp;</label>
+					<button class="btn btn-primary btn-block" type="submit" id="buscar" name="buscar">Buscar</button>
+				</section>
+			</div>
+		</div>
+	</form>
+</div>

@@ -1,0 +1,177 @@
+<div class="container" ng-controller="acuraciaTuring" ng-init="load()">
+    <ol class="breadcrumb">
+        <li><a href="#">Acurácia</a></li>
+        <li class="active">Turing</li>
+    </ol>
+    <span style="font-size: small; color: red;">em construção</span>
+
+    <div class="modal fade bs-example-modal-lg" id="modalTuring" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="gridSystemModalLabel">Resultado de Execuções</h4>
+                </div>
+                <div id="conteudoModalHistorico" class="modal-body">
+                    <table class="table table-bordered" id="dialogoHistorico" cellspacing="0" width="100%">
+                        <tbody id="conteudoDialogoModal">
+                            <tr ng-repeat="x in listaExecucoes">
+                                <td>
+                                    <table cellspacing="0" width="100%">
+                                        <tbody>
+                                            <tr>
+                                                <td class="text-center" style="width: 160px; font-weight: bold;">{{x.data | date: 'dd/MM/yyyy HH:mm:ss'}}</td>
+                                                <td class="text-left"><span ng-if="x.sucesso">Execução realizada com sucesso</span><span ng-if="!x.sucesso">Execução realizada com erro</span></td>
+                                                <td class="text-center pointer" style="width: 25px"><img data-other-src="/images/minus-sign.png" src="/images/plus-sign.png"
+                                                        ng-click="verExecucao($event)" alt="Detalhes" title="Detalhes" style="width: 20px; height: 20px;"></td>
+                                            </tr>
+                                            <tr ng-repeat="y in x.execucao" style="display: none;">
+                                                <td colspan="3">
+                                                    <table cellspacing="0" width="90%" style="border: 1px solid #ddd; margin: 2px 5%;">
+                                                        <tbody>
+                                                            <tr style="border-bottom: 1px solid #ddd;">
+                                                                <td style="width: 150px; padding: 2px;">Input Realizada:</td>
+                                                                <td style="padding: 2px;">{{y.pergunta}}</td>
+                                                            </tr>
+                                                            <tr style="border-bottom: 1px solid #ddd;">
+                                                                <td style="width: 150px; padding: 2px;">Output Aguardada:</td>
+                                                                <td style="padding: 2px;"><span ng-bind-html="y.resposta | to_trusted"></span></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="width: 150px; padding: 2px;">Output Recebida:</td>
+                                                                <td style="padding: 2px;"><span ng-bind-html="y.output.text[0] | to_trusted"></span></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="alert alert-success alert-dismissible ng-cloak" role="alert" ng-show="operacaoSucesso">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong>Sucesso!</strong> Operação realizada.
+    </div>
+    <div class="alert alert-danger alert-dismissible ng-cloak" role="alert" ng-show="operacaoFalha">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong>Erro!</strong> Falha na operação.
+    </div>
+    <form novalidate>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <section class="col-xs-12 col-sm-12 col-md-12 line-form">
+                    <div class="form-group">
+                        <label class="control-label" for="nomeTeste">Nome do teste</label>
+                        <input class="form-control" name="nomeTeste" id="nomeTeste" ng-model="nomeTeste" type="text">
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="inputs">
+                    <section class="col-xs-12 col-sm-12 col-md-12 line-form" ng-repeat="x in inputPerguntaResposta">
+                        <section class="col-xs-12 col-sm-10 col-md-10 line-form">
+                            <div class="form-group">
+                                <label class="control-label" for="{{x.idPergunta}}">Pergunta</label>
+                                <input class="form-control" name="{{x.idPergunta}}" id="{{x.idPergunta}}" ng-model="x.valorPergunta" type="text">
+                                <label class="control-label" for="{{x.idResposta}}">Resposta</label>
+                                <input class="form-control" name="{{x.idResposta}}" id="{{x.idResposta}}" ng-model="x.valorResposta" type="text">
+                            </div>
+                        </section>
+                        <section class="col-xs-12 col-sm-2 col-md-2 line-form mt-pergunta-resposta" ng-show="$last">
+                            <button class="btn btn-danger btn-block" type="submit" id="delPerguntas" name="delPerguntas" ng-click="removePerguntaResposta()">Remover</button>
+                            <!--<button class="btn btn-danger btn-block" type="submit" id="remover" name="remover" ng-click="removePerguntaResposta(x)">Remover</button>-->
+                        </section>
+                    </section>
+                </div>
+                <br>
+                <div class="buttons">
+                    <section class="col-xs-12 col-sm-4 col-md-3 line-form">
+                        <button class="btn btn-success btn-block" type="submit" id="addPerguntas" name="addPerguntas" ng-click="novaPerguntaResposta()">Adicionar Pergunta</button>
+                    </section>
+                    <section class="col-xs-12 col-sm-4 col-md-3 line-form">
+                        <button class="btn btn-primary btn-block" type="submit" id="savePerguntas" name="savePerguntas" ng-click="salvar()">Salvar</button>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <h2>Legendas</h2>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <table style="width: 100%;" cellspacing="1" cellpadding="1">
+                <tr>
+                    <td style="width: 50%;">
+                        <fieldset style="margin-bottom: 10px; margin-top: 10px;">
+                            <legend>Operações</legend>
+                            <div style="width: 150px; height: 20px; float: left;"><img src="/images/debug_run.png" alt="Rodar teste" title="Rodar teste" style="width: 20px; height: 20px;">                                Executar Teste </div>
+                            <div style="width: 150px; height: 20px; float: left;"><img src="/images/debug_delete.png" alt="Excluir teste" title="Excluir teste" style="width: 20px; height: 20px;">                                Excluir Teste
+                            </div>
+                            <div style="width: 150px; height: 20px; float: left;"><img src="/images/debug_view.png" alt="Excluir teste" title="Excluir teste" style="width: 20px; height: 20px;">                                Ver Testes </div>
+                        </fieldset>
+                    </td>
+                    <td>
+                        <fieldset style="margin-bottom: 10px; margin-top: 10px;">
+                            <legend>Status Teste</legend>
+                            <div class="bolaParado" style="width: 150px; height: 20px; padding-left: 25px; float: left;">Parado </div>
+                            <div class="bolaAndamento" style="width: 150px; height: 20px; padding-left: 25px; float: left;">Executando </div>
+                            <div class="bolaSucesso" style="width: 150px; height: 20px; padding-left: 25px; float: left;">Executado </div>
+                        </fieldset>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <h2>Testes</h2>
+    <div class="panel panel-default ">
+        <div class="panel-body">
+            <table id="listaTuring" class="table table-striped table-bordered " cellspacing="0 " width="100% ">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Data Criação</th>
+                        <th>Operação</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Data Criação</th>
+                        <th>Operação</th>
+                        <th>Status</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    <tr ng-repeat="x in listaDataTable">
+                        <td>{{x.nome_teste}}</td>
+                        <td>{{x.createdAt | date: 'dd/MM/yyyy HH:mm:ss'}}</td>
+                        <td style="text-align: center;">
+                            <img src="/images/debug_run.png " alt="Rodar teste" title="Rodar teste" class="pointer " style="width: 20px; height:
+        20px; " ng-click="executar(x.id, $event);">&nbsp;
+                            <img src="/images/debug_delete.png " alt="Apagar teste" title="Apagar teste" class="pointer " style="width: 20px;
+        height: 20px; " ng-click="apagar(x.id);">&nbsp;
+                            <img src="/images/debug_view.png " alt="Ver testes" title="Ver testes" class="pointer " style="width: 20px;
+        height: 20px; " ng-click="verTeste(x.id);" data-toggle="modal" data-target="#modalTuring">
+                        </td>
+                        <td style="text-align: center;">
+                            <img src="/images/transparente.png" class="bolaParado" style="width: 20px; height: 20px; ">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

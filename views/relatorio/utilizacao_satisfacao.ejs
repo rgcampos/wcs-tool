@@ -1,0 +1,102 @@
+<div class="container" ng-controller="relUtilizacaoSatisfacao" ng-init="load()">
+    <ol class="breadcrumb">
+        <li><a href="#">Relatório</a></li>
+        <li class="active">Utilização &amp; Satisfação</li>
+    </ol>
+    
+    <form novalidate>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <section class="col-xs-12 col-sm-4 col-md-4 line-form border-rigth">
+                    <div class="form-group">
+                        <label class="control-label" for="date_start">Data Inicio</label>
+                        <input class="form-control" name="date_start" id="date_start" ng-model="date_start" type="date">
+                    </div>
+                </section>
+                <section class="col-xs-12 col-sm-4 col-md-4 line-form border-rigth">
+                    <div class="form-group">
+                        <label class="control-label" for="date_end">Data Fim</label>
+                        <input class="form-control" name="date_end" id="date_end" ng-model="date_end" type="date">
+                    </div>
+                </section>
+                <section class="col-xs-12 col-sm-4 col-md-4 line-form">
+                    <div class="form-group">
+                        <label class="control-label" for="buscar">&nbsp;</label>
+                        <button class="btn btn-primary btn-block" type="submit" id="buscar" name="buscar" ng-click="find()">Buscar</button>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </form>
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="row" style="text-align: center;" ng-show="mostraLoader">
+                <img src="/images/preload.gif" alt="Carregando..." title="Carregando..." style="height: 30px;">
+            </div>
+            <div class="row" style="text-align: left;" ng-show="!mostraLoader">
+                <div class="panel-body">
+                    <table id="tableFeedback" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th>Data</th>
+                                <th>Total de Iteração</th>
+                                <th>Iteração Positiva</th>
+                                <th>Iteração Negativa</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>Data</th>
+                                <th>Total de Iteração</th>
+                                <th>Iteração Positiva</th>
+                                <th>Iteração Negativa</th>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            <tr ng-repeat="x in dataFeedback">
+                                <td class="text-center">
+                                    {{x.data}}
+                                </td>
+                                <td>{{x.total}}</td>
+                                <td>{{x.positivo}}</td>
+                                <td>{{x.negativo}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="panel-body">
+                    <table id="tableHistory" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th>Data</th>
+                                <th>Tempo Médio Atendimento</th>
+                                <th>Tempo Minimo Atendimento</th>
+                                <th>Tempo Máximo Atendimento</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>Data</th>
+                                <th>Tempo Médio Atendimento</th>
+                                <th>Tempo Minimo Atendimento</th>
+                                <th>Tempo Máximo Atendimento</th>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            <tr ng-repeat="x in dataHistorico">
+                                <td class="text-center">
+                                    {{x.data}}
+                                </td>
+                                <td>{{x.tempoMedio}}</td>
+                                <td>{{x.tempoMenor}}</td>
+                                <td>{{x.tempoMaior}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

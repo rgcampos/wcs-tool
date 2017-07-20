@@ -1,0 +1,151 @@
+<div class="container" ng-controller="acuraciaExperimento" ng-init="load()">
+    <ol class="breadcrumb">
+        <li><a href="#">Acurácia</a></li>
+        <li class="active">Experimento</li>
+    </ol>
+
+    <div class="modal fade bs-example-modal-lg" id="modalMatriz" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content custom-height-modal">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="gridSystemModalLabel">Matriz: Teste em {{dataTeste | date: 'dd/MM/yyyy HH:mm:ss'}}</h4>
+                </div>
+                <div id="conteudoModalMatriz" class="modal-body" style="overflow-x: auto;">
+                    <div class="row" style="text-align: center;" ng-show="mostraLoaderMatriz">
+                        <img src="/images/preload.gif" alt="Carregando..." title="Carregando..." style="height: 30px;">
+                    </div>
+                    <table id="tabelaMatrizConfusao" class="table table-striped table-bordered" cellspacing="0" width="100%" ng-show="!mostraLoaderMatriz">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th ng-repeat="x in tstMatriz">{{x.intent}}</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>#</th>
+                                <th ng-repeat="x in tstMatriz">#</th>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            <tr ng-repeat="x in tstMatriz">
+                                <td>{{x.intent}}</td>
+                                <td ng-repeat="y in tstMatriz">{{x.confusionMatrix[$index]}}</td>
+                                <tr ng-repeat="x in tstSummary">
+                                    <td>{{x.intent}}</td>
+                                    <td ng-repeat="y in tstSummary">{{x.confusionMatrix[$index]}}</td>
+                                </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade bs-example-modal-lg" id="modalVetor" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content custom-height-modal">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="gridSystemModalLabel">Vetor: Teste em {{dataTeste | date: 'dd/MM/yyyy HH:mm:ss'}}</h4>
+                </div>
+                <div id="conteudoModalVetor" class="modal-body" style="overflow-x: auto;">
+                    <div class="row" style="text-align: center;" ng-show="mostraLoaderVetor">
+                        <img src="/images/preload.gif" alt="Carregando..." title="Carregando..." style="height: 30px;">
+                    </div>
+                    <table id="tabelaVetorConfusao" class="table table-striped table-bordered" cellspacing="0" width="100%" ng-show="!mostraLoaderVetor">
+                        <thead>
+                            <tr>
+                                <th>Confusão</th>
+                                <th>#</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="x in tstVetor" ng-click="x.hide = !x.hide">
+                                <td>
+                                    <strong>{{x.rightIntent}} / {{x.wrongIntent}}</strong>
+                                    <ul ng-hide="x.hide">
+                                        <li ng-repeat="y in x.examples">{{y.example}} / {{(y.confidence * 100) | number: 2}}%</li>
+                                    </ul>
+                                </td>
+                                <td>{{x.value}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="alert alert-success alert-dismissible ng-cloak" role="alert" ng-show="operacaoSucesso">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong>Sucesso!</strong> Operação realizada.
+    </div>
+    <div class="alert alert-danger alert-dismissible ng-cloak" role="alert" ng-show="operacaoFalha">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong>Erro!</strong> Falha na operação.
+    </div>
+    <div id="alertNovoTeste" name="alertNovoTeste" class="alert alert-warning" role="alert">
+        <strong>Aguarde!</strong> Um novo teste está sendo criado e executado.
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <section class="col-xs-12 col-sm-12 col-md-12">
+                <button class="btn btn-primary btn-block" type="submit" id="novoTeste" name="novoTeste" ng-click="criarTeste()">Novo Teste</button>
+            </section>
+        </div>
+    </div>
+
+
+    <h2>Testes</h2>
+    <div class="panel panel-default ">
+        <div class="panel-body ">
+            <div class="row" style="text-align: center;" ng-show="mostraLoader">
+                <img src="/images/preload.gif" alt="Carregando..." title="Carregando..." style="height: 30px;">
+            </div>
+            <table id="listaExperimento" class="table table-striped table-bordered" cellspacing="0" width="100%" ng-show="!mostraLoader">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Data Execução</th>
+                        <th>Status</th>
+                        <th>Tot Exemplos</th>
+                        <th>Tot Intenções</th>
+                        <th>Acurácia</th>
+                        <th>Threshold</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>#</th>
+                        <th>Data Execução</th>
+                        <th>Status</th>
+                        <th>Tot Exemplos</th>
+                        <th>Tot Intenções</th>
+                        <th>Acurácia</th>
+                        <th>Threshold</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    <tr ng-repeat="x in listaTestes">
+                        <td class="text-center">
+                            <img src="/images/data_th.png" alt="Matriz de Confusão" title="Matriz de Confusão" data-toggle="modal" data-target="#modalMatriz"
+                                class="imgModalHistorico" ng-click="abrirModalMatriz(x.createdAt);">&nbsp;&nbsp;
+                            <img src="/images/data_th-list.png" alt="Vetor de Confusão" title="Vetor de Confusão" data-toggle="modal" data-target="#modalVetor"
+                                class="imgModalHistorico" ng-click="abrirModalVetor(x.createdAt);">
+                        </td>
+                        <td>{{x.createdAt | date: 'dd/MM/yyyy HH:mm:ss'}}</td>
+                        <td>Finalizado</td>
+                        <td>{{x.resultado.examplesTotal}}</td>
+                        <td>{{x.resultado.intentsNumber}}</td>
+                        <td>{{((x.resultado.acuracyThreshold) * 100) | number: 2}}%</td>
+                        <td>{{((x.resultado.threshold) * 100) | number: 2}}%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

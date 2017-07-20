@@ -1,0 +1,59 @@
+<div class="container" ng-controller="backup" ng-init="load()">
+    <ol class="breadcrumb">
+        <li class="active">Backup</li>
+    </ol>
+    <span style="font-size: small; color: red;">em construção</span>
+
+    <div class="alert alert-success alert-dismissible ng-cloak" role="alert" ng-show="operacaoSucesso">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong>Sucesso!</strong> Operação realizada.
+    </div>
+    <div class="alert alert-danger alert-dismissible ng-cloak" role="alert" ng-show="operacaoFalha">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong>Erro!</strong> Falha na operação.
+    </div>
+    <div id="alertNovoBackup" name="alertNovoBackup" class="alert alert-warning" role="alert">
+        <strong>Aguarde!</strong> Um novo backup está sendo gerado.
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <section class="col-xs-12 col-sm-12 col-md-12">
+                <button class="btn btn-primary btn-block" id="btnNovoBackup" name="btnNovoBackup" ng-click="fazerBackup()">Criar Backup</button>
+            </section>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="row" style="text-align: center;" ng-show="mostraLoader">
+                <img src="/images/preload.gif" alt="Carregando..." title="Carregando..." style="height: 30px;">
+            </div>
+            <table id="tableBackup" class="table table-striped table-bordered ng-cloak" cellspacing="0" width="100%" ng-show="!mostraLoader">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Descrição</th>
+                        <th>Data Criação</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>#</th>
+                        <th>Descrição</th>
+                        <th>Data Criação</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    <tr ng-repeat="x in dadosBackup">
+                        <td class="text-center">
+                            <img src="/images/data_download.png" alt="Download Backup" title="Download Backup" class="imgModalHistorico" ng-click="downloadBackup(x.id);">&nbsp;&nbsp;
+                            <img src="/images/data_upload.png" alt="Restore Backup" title="Restore Backup" class="imgModalHistorico">
+                        </td>
+                        <td>Backup realizado</td>
+                        <td>{{x.createdAt | date: 'dd/MM/yyyy HH:mm:ss'}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

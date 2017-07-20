@@ -1,0 +1,21 @@
+
+#divPersonality section,
+#divConsumerNeeds section,
+#divValues section
+{
+    font-size: 16px;
+}
+
+#divPersonality span {
+    cursor: pointer;
+}
+
+.chartHidden {
+    display: none;
+}
+
+#divGraph,
+#divMessageNotFound,
+#divLoading {
+    display: none;
+}

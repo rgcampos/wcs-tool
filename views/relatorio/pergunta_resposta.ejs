@@ -1,0 +1,77 @@
+<div class="container" ng-controller="relPerguntaResposta" ng-init="load()">
+    <ol class="breadcrumb">
+        <li><a href="#">Relatório</a></li>
+        <li class="active">Pergunta &amp; Resposta</li>
+    </ol>
+    
+    <form novalidate>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <section class="col-xs-12 col-sm-4 col-md-4 line-form border-rigth">
+                    <div class="form-group">
+                        <label class="control-label" for="date_start">Data Inicio</label>
+                        <input class="form-control" name="date_start" id="date_start" ng-model="date_start" type="date">
+                    </div>
+                </section>
+                <section class="col-xs-12 col-sm-4 col-md-4 line-form border-rigth">
+                    <div class="form-group">
+                        <label class="control-label" for="date_end">Data Fim</label>
+                        <input class="form-control" name="date_end" id="date_end" ng-model="date_end" type="date">
+                    </div>
+                </section>
+                <section class="col-xs-12 col-sm-4 col-md-4 line-form">
+                    <div class="form-group">
+                        <label class="control-label" for="buscar">&nbsp;</label>
+                        <button class="btn btn-primary btn-block" type="submit" id="buscar" name="buscar" ng-click="find()">Buscar</button>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </form>
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="row" style="text-align: center;" ng-show="mostraLoader">
+                <img src="/images/preload.gif" alt="Carregando..." title="Carregando..." style="height: 30px;">
+            </div>
+            <table id="tablePerguntaResposta" class="table table-bordered" cellspacing="0" width="100%" ng-show="!mostraLoader">
+                <thead>
+                    <tr>
+                        <th>ID Conversa</th>
+                        <th>Feedback</th>
+                        <th>Conversa</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>ID Conversa</th>
+                        <th>Feedback</th>
+                        <th>Conversa</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    <tr ng-repeat="x in dadosPerguntaResposta">
+                        <td>{{x.conversation_id}}</td>
+                        <td>{{x.success}}</td>
+                        <td>
+                            <table cellspacing="0" class="table">
+                                <tbody>
+                                    <tr ng-repeat="y in x.historico" ng-class="y.typeAgent == 1?'modalHistoricoLinhaAtendente':'modalHistoricoLinhaUsuario'">
+                                        <td>
+                                            <span ng-if="y.typeAgent == 1">Watson</span><span ng-if="y.typeAgent == 2">Usuário</span>
+                                        </td>
+                                        <td>
+                                            <span ng-bind-html="y.text | to_trusted"></span>
+                                            <span class="intent" ng-if="y.typeAgent == 1" ng-show="y.intents.length"><img src="/images/intention.png" height="10" alt="Intenções" title="Intenções">&nbsp;#{{y.intents[0].intent}}&nbsp;&nbsp;{{((y.intents[0].confidence) * 100) | number: 2}}%</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>

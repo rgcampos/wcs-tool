@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        Watson Conversation Service Tool
+    </title>
+
+    <!-- Viewport mobile tag for sensible mobile support -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" sizes="57x57" href="/images/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/images/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/images/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/images/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/images/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/images/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/images/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/images/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/images/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/images/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/images/favicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/images/favicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
+
+    <link rel="stylesheet" href="/styles/01_dependencias/01_bootstrap.min.css">
+    <link rel="stylesheet" href="/styles/02_geral/01_config.css">
+
+</head>
+
+<body ng-app="chatBot">
+
+
+    <div class="container" ng-controller="auth">
+        <div class="loginmodal-container">
+            <div class="alert alert-success alert-dismissible ng-cloak" role="alert" ng-show="operacaoSucesso">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <strong>Sucesso!</strong> Operação realizada.
+            </div>
+            <div class="alert alert-danger alert-dismissible ng-cloak" role="alert" ng-show="operacaoFalha">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <strong>Erro!</strong> Falha na operação.
+            </div>
+            <h1><img src="/images/logo_login.png"></h1><br>
+            <form method="POST" ng-submit="processForm()">
+                <input type="text" name="chapa" id="chapa" ng-model="formData.chapa" placeholder="Usuário" required autofocus>
+                <input type="password" name="senha" id="senha" ng-model="formData.senha" placeholder="Senha" required>
+                <input type="submit" class="btn btn-primary btn-block" value="Entrar" id="btnEntrar" name="btnEntrar">
+            </form>
+            <div id="loading" class="ng-cloak">
+                <img src="/images/ajax-loader.gif" alt="Carregando..." title="Carregando...">
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/dependencies/sails.io.js"></script>
+    <script src="/js/dependencies/external/01_jquery-3.1.1.min.js"></script>
+    <script src="/js/dependencies/external/02_bootstrap.min.js"></script>
+    <script src="/js/dependencies/external/03_fontawesome.js"></script>
+    <script src="/js/dependencies/external/04_jquery.dataTables.min.js"></script>
+    <script src="/js/dependencies/external/13_moment.js"></script>
+    <script src="/js/dependencies/angular/main/angular.js"></script>
+    <script src="/js/dependencies/angular/main/mainAngular.js"></script>
+    <script src="/js/dependencies/angular/main/mainUtils.js"></script>
+    <script src="/js/dependencies/angular/controller/authenticate.js"></script>
+    <script src="/js/dependencies/angular/controller/home.js"></script>
+    <script src="/js/dependencies/angular/controller/menu.js"></script>
+</body>
+
+</html>

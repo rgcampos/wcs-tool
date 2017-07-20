@@ -1,0 +1,95 @@
+<style>
+    .ng-cloak {
+        display: none !important;
+    }
+</style>
+<div class="container" ng-controller="relMetricas" ng-init="load()">
+    <ol class="breadcrumb">
+        <li><a href="#">Relatório</a></li>
+        <li class="active">Métricas</li>
+    </ol>
+
+    <div class="panel panel-default" ng-show="mostraLoader">
+        <div class="panel-body">
+            <div class="row" style="text-align: center;">
+                <img src="/images/preload.gif" alt="Carregando..." title="Carregando..." style="height: 30px;">
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-default" ng-show="!mostraLoader" class="ng-cloak">
+        <div class="panel-body">
+            <table style="width: 100%;">
+                <tbody>
+                    <tr>
+                        <td style="width: 5%;">
+                            &nbsp;
+                        </td>
+                        <td style="width: 30%;">
+                            <canvas id="feedackPizza"></canvas>
+                        </td>
+                        <td style="width: 5%;">
+                            &nbsp;
+                        </td>
+                        <td style="width: 60%;">
+                            <canvas id="feedbackBarra"></canvas>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="panel panel-default" ng-show="!mostraLoader" class="ng-cloak">
+        <div class="panel-body">
+            <table style="width: 100%;">
+                <tbody>
+                    <tr>
+                        <td style="width: 5%;">
+                            &nbsp;
+                        </td>
+                        <td style="width: 30%;" class="text-center">
+                            <span style="font-size: small; font-weight: bold; padding: 10px 10px; color: #666">Total Chamadas API</span>
+                            <br>
+                            <br>
+                            <span style="font-size: 60px; padding: 10px 10px;">{{totalChamadasAPI}}</span>
+                        </td>
+                        <td style="width: 5%;">
+                            &nbsp;
+                        </td>
+                        <td style="width: 60%;">
+                            <canvas id="chamadaAPIBarra"></canvas>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="panel panel-default" ng-show="!mostraLoader" class="ng-cloak">
+        <div class="panel-body">
+            <table style="width: 100%;">
+                <tbody>
+                    <tr>
+                        <td style="width: 5%;">
+                            &nbsp;
+                        </td>
+                        <td style="width: 30%;" class="text-center">
+                            <canvas id="intencoesMaisUsadas"></canvas>
+                        </td>
+                        <td style="width: 30%;" class="text-center">
+                            <canvas id="entidadesMaisUsadas"></canvas>
+                        </td>
+                        <td style="width: 30%;" class="text-center">
+                            <canvas id="browsersMaisUsadas"></canvas>
+                        </td>
+                        <td style="width: 5%;">
+                            &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,141 @@
+<div class="container" ng-controller="corpus_intencao" ng-init="load()">
+    <ol class="breadcrumb">
+        <li><a href="#">Corpus</a></li>
+        <li class="active">Intenção</li>
+    </ol>
+
+    <div class="modal fade bs-example-modal-lg" id="modalIntencao" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content custom-height-modal">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="gridSystemModalLabel">Intenção</h4>
+                </div>
+                <div id="conteudoModalIntencao" class="modal-body">
+                    <table id="dialogoIntencao" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th>
+                                    {{intent}}
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <form method="POST" ng-submit="processFormExample()">
+                                        <div class="panel-body">
+                                            <section class="col-xs-12 col-sm-8 col-md-8">
+                                                <input class="form-control" name="formDataExemplo.example" id="formDataExemplo.example" ng-model="formDataExemplo.example"
+                                                    type="text" placeholder="Exemplo" style="margin-bottom: 5px; margin-top: 5px;">
+                                                <input name="formDataExemplo.oldExample" id="formDataExemplo.oldExample" ng-model="formDataExemplo.oldExample" type="hidden">
+                                                <input name="formDataExemplo.intent" id="formDataExemplo.intent" ng-model="formDataExemplo.intent" type="hidden">
+                                            </section>
+                                            <section class="col-xs-12 col-sm-4 col-md-4">
+                                                <input type="submit" class="btn btn-primary btn-block" value="Criar/Alterar Exemplo" id="btnCriarExemplo" name="btnCriarExemplo"
+                                                    style="margin-top: 5px;">
+                                                <div id="loading" class="ng-cloak">
+                                                    <img src="/images/ajax-loader.gif" alt="Carregando..." title="Carregando...">
+                                                </div>
+                                            </section>
+                                        </div>
+                                    </form>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="row" style="text-align: center;" ng-show="mostraLoaderExemplo">
+                                        <img src="/images/preload.gif" alt="Carregando..." title="Carregando..." style="height: 30px;">
+                                    </div>
+                                    <table id="tabelaIntencaoExemplo" class="table table-striped table-bordered" cellspacing="0" width="100%" ng-show="!mostraLoaderExemplo">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Exemplo</th>
+                                                <th>Data Criação</th>
+                                            </tr>
+                                        </thead>
+                                        <tfoot>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Exemplo</th>
+                                                <th>Data Criação</th>
+                                            </tr>
+                                        </tfoot>
+                                        <tbody>
+                                            <tr ng-repeat="x in dadosIntencaoExemplo">
+                                                <td class="text-center">
+                                                    <img src="/images/data_edit.png" alt="Editar exemplo" title="Editar exemplo" class="imgModalHistorico" ng-click="editarExemplo(intent, x.text.trim());">&nbsp;&nbsp;
+                                                    <img src="/images/data_delete.png" alt="Excluir exemplo" title="Excluir exemplo" class="imgModalHistorico" ng-click="excluirExemplo(intent, x.text.trim());">
+                                                </td>
+                                                <td>{{x.text}}</td>
+                                                <td style="text-align: center;">{{x.created | date: 'dd/MM/yyyy HH:mm:ss'}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <form method="POST" ng-submit="processForm()">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <section class="col-xs-12 col-sm-6 col-md-6 border-rigth">
+                    <input class="form-control" name="formData.intent" id="formData.intent" ng-model="formData.intent" type="text" placeholder="Intenção"
+                        style="margin-bottom: 5px; margin-top: 5px;">
+                    <input class="form-control" name="formData.description" id="formData.description" ng-model="formData.description" type="text"
+                        placeholder="Descrição" style="margin-bottom: 5px; margin-top: 5px;">
+                </section>
+                <section class="col-xs-12 col-sm-6 col-md-6">
+                    <div class="form-group">
+                        <label class="control-label" for="btnCriarIntencao">&nbsp;</label>
+                        <input type="submit" class="btn btn-primary btn-block" value="Criar Intenção" id="btnCriarIntencao" name="btnCriarIntencao">
+                    </div>
+                </section>
+            </div>
+        </div>
+    </form>
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="row" style="text-align: center;" ng-show="mostraLoaderIntencao">
+                <img src="/images/preload.gif" alt="Carregando..." title="Carregando..." style="height: 30px;">
+            </div>
+            <table id="tabelaIntencao" class="table table-striped table-bordered ng-cloak" cellspacing="0" width="100%" ng-show="!mostraLoaderIntencao">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Intenção</th>
+                        <th>Descrição</th>
+                        <th>Data Criação</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>#</th>
+                        <th>Intenção</th>
+                        <th>Descrição</th>
+                        <th>Data Criação</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    <tr ng-repeat="x in dadosIntencao">
+                        <td class="text-center">
+                            <img src="/images/data_view.png" alt="Visualizar Exemplos" title="Visualizar Exemplos" data-toggle="modal" data-target="#modalIntencao"
+                                class="imgModalHistorico" ng-click="abrirModalIntencao(x.intent);">&nbsp;&nbsp;
+                            <img src="/images/data_delete.png" alt="Excluir Intenção" title="Excluir Intenção" class="imgModalHistorico" ng-click="excluirIntencao(x.intent);">
+                        </td>
+                        <td>{{x.intent}}</td>
+                        <td>{{x.description}}</td>
+                        <td style="text-align: center;">{{x.created | date: 'dd/MM/yyyy HH:mm:ss'}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,29 @@
+<div class="container" ng-controller="debug" ng-init="load()">
+	<ol class="breadcrumb">
+        <li><a href="#">Conversação</a></li>
+        <li class="active">Debug</li>
+    </ol>
+    
+	<div id="bodybox" class="ng-cloak">
+		<div id="header" class="row">
+			<div class="col-sm-12 col-md-12">
+				&nbsp;
+			</div>
+		</div>
+
+		<div id="content" class="row">
+			<div id="contentChat" name="contentChat" class="col-sm-12 col-md-12">
+
+			</div>
+		</div>
+		<div id="form" class="row">
+			<div class="col-sm-12 col-md-12">
+				<div class="input-group" style="line-height: 50px;align-items: center; display: flex;">
+					<input type="text" id="txtMessage" name="txtMessage" class="form-control" placeholder="Digite seu texto..." my-enter="sendMessage()"
+					 ng-model="txtMessage">&nbsp;
+					<button class="btn btn-primary" id="btnSend" name="btnSend" type="button" ng-click="sendMessage()">Enviar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,384 @@
+@import url(https://fonts.googleapis.com/css?family=Rubik:300,400,500,700,900);
+#bodybox {
+    margin: auto;
+    background-color: white;
+}
+
+#header {
+    background-color: #D3D3D3;
+    color: black;
+    min-height: 50px;
+    border-style: solid;
+    border-width: 1px;
+    -webkit-border-radius: 15px 15px 0px 0px;
+    -moz-border-radius: 15px 15px 0px 0px;
+    border-radius: 15px 15px 0px 0px;
+    border-color: #D3D3D3;
+    padding: 5px;
+}
+
+#content {
+    background-color: white;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #D3D3D3;
+}
+
+#content #bot {
+    vertical-align: middle;
+    float: left;
+    clear: both;
+    padding-bottom: 2px;
+    width: 100%;
+}
+
+#content #bot .userWatson {
+    margin: 5px;
+    float: left;
+}
+
+#content #bot .userWatsonTyping {
+    -webkit-border-radius: 15px 15px 15px 3px;
+    -moz-border-radius: 15px 15px 15px 3px;
+    border-radius: 15px 15px 15px 3px;
+    min-height: 50px;
+    min-width: 100px;
+    max-width: 350px;
+    margin: 5px;
+    padding: 5px;
+    text-align: left;
+    float: left;
+    text-align: left;
+}
+
+#content #bot div.userWatsonTyping img {
+    height: 6px;
+    width: 25px;
+    margin-top: 32px;
+}
+
+#content #bot .userWatsonContent {
+    background-color: #FFE4C4;
+    color: #FA8072;
+    border-style: solid;
+    border-width: 1px;
+    -webkit-border-radius: 15px 15px 15px 3px;
+    -moz-border-radius: 15px 15px 15px 3px;
+    border-radius: 15px 15px 15px 3px;
+    border-color: #FFE4C4;
+    min-height: 50px;
+    min-width: 35px;
+    max-width: 75%;
+    margin: 5px;
+    padding: 5px;
+    text-align: justify;
+    float: left;
+    -webkit-box-shadow: 3px 3px 15px 0px rgba(0, 0, 0, 0.09);
+    -moz-box-shadow: 3px 3px 15px 0px rgba(0, 0, 0, 0.09);
+    box-shadow: 3px 3px 15px 0px rgba(0, 0, 0, 0.09);
+}
+
+
+/*
+#content #bot .userWatsonContent:after, #content #bot .userWatsonContent:before {
+    content: "";
+    position: absolute;
+    right: 0;
+    width: .5rem
+}
+
+#content #bot .userWatsonContent:after {
+    z-index: -1;
+    bottom: -.5rem;
+    height: .5rem;
+    background: #fff;
+    border-top-right-radius: 1.25rem
+}*/
+
+#content #person {
+    vertical-align: middle;
+    float: right;
+    clear: both;
+    padding-bottom: 2px;
+    width: 100%;
+}
+
+#content #person .user {
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    margin: 5px;
+    float: right;
+    vertical-align: middle;
+}
+
+#content #person .userContent {
+    background-color: #AFEEEE;
+    color: #4682B4;
+    border-style: solid;
+    border-width: 1px;
+    -webkit-border-radius: 15px 15px 3px 15px;
+    -moz-border-radius: 15px 15px 3px 15px;
+    border-radius: 15px 15px 3px 15px;
+    border-color: #AFEEEE;
+    min-height: 50px;
+    min-width: 35px;
+    max-width: 75%;
+    margin: 5px;
+    padding: 5px;
+    text-align: justify;
+    float: right;
+    -webkit-box-shadow: 3px 3px 15px 0px rgba(0, 0, 0, 0.09);
+    -moz-box-shadow: 3px 3px 15px 0px rgba(0, 0, 0, 0.09);
+    box-shadow: 3px 3px 15px 0px rgba(0, 0, 0, 0.09);
+}
+
+#form {
+    background-color: #D3D3D3;
+    min-height: 60px;
+    border-style: solid;
+    vertical-align: middle;
+    border-width: 1px;
+    -webkit-border-radius: 0px 0px 15px 15px;
+    -moz-border-radius: 0px 0px 15px 15px;
+    border-radius: 0px 0px 15px 15px;
+    border-color: #D3D3D3;
+    -webkit-box-shadow: 0 1px 1px 0 rgba(165, 165, 165, 0.50);
+    -moz-box-shadow: 0 1px 1px 0 rgba(165, 165, 165, 0.50);
+    box-shadow: 0 1px 1px 0 rgba(165, 165, 165, 0.50);
+}
+
+.timeChat {
+    color: #aab7b8;
+    font-size: x-small;
+}
+
+.perguntaFeedback {
+    margin-left: 65px;
+    width: 300px;
+    line-height: 20px;
+}
+
+.perguntaChamado {
+    margin-left: 65px;
+    width: 300px;
+    line-height: 20px;
+}
+
+.line-form {
+    line-height: 35px !important;
+}
+
+.imgModalHistorico {
+    height: 20px;
+    cursor: pointer;
+}
+
+.modalHistoricoLinhaAtendente {
+    color: #555555;
+}
+
+.modalHistoricoLinhaUsuario {
+    color: #3377CC;
+}
+
+.modalHistoricoAgente {
+    width: 50px;
+    font-weight: bold;
+}
+
+.intent {
+    font-style: italic;
+    font-weight: bold;
+    font-size: x-small;
+    text-transform: lowercase;
+    display: block;
+    margin-top: 5px;
+}
+
+.addIntent {
+    font-size: x-small;
+    text-transform: lowercase;
+    display: block;
+    margin-top: 5px;
+}
+
+.tone {
+    font-weight: bold;
+    font-size: x-small;
+    text-transform: lowercase;
+    display: block;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.bolaParado {
+    background: transparent url('/images/bug_red.png') no-repeat top left;
+    background-size: 20px 20px;
+}
+
+.bolaAndamento {
+    background: transparent url('/images/bug_yellow.png') no-repeat top left;
+    background-size: 20px 20px;
+}
+
+.bolaSucesso {
+    background: transparent url('/images/bug_green.png') no-repeat top left;
+    background-size: 20px 20px;
+}
+
+.ng-cloak {
+    display: none !important;
+}
+
+.custom-height-modal {
+    height: 600px;
+}
+
+.req:after {
+    color: #E32;
+    content: ' *';
+    display: inline;
+}
+
+@media only screen and (min-width: 765px) {
+    .mt-pergunta-resposta {
+        margin-top: 76px;
+    }
+    .loginmodal-container {
+        padding: 30px;
+        max-width: 350px;
+        width: 100% !important;
+        background-color: #F7F7F7;
+        margin: 0 auto;
+        border-radius: 8px;
+        border: 1px #d9d9d9 solid;
+        overflow: hidden;
+        margin-top: 150px;
+    }
+}
+
+@media only screen and (min-width: 1224px) {
+    .border-rigth {
+        border-right: 1px #CECECE solid;
+    }
+    .mt-pergunta-resposta {
+        margin-top: 76px;
+    }
+    .navbar {
+        margin-bottom: 25px !important;
+    }
+    .loginmodal-container {
+        padding: 30px;
+        max-width: 350px;
+        width: 100% !important;
+        background-color: #F7F7F7;
+        margin: 0 auto;
+        border-radius: 8px;
+        border: 1px #d9d9d9 solid;
+        overflow: hidden;
+        margin-top: 150px;
+    }
+}
+
+@media only screen and (min-width: 1824px) {
+    .border-rigth {
+        border-right: 1px #CECECE solid;
+    }
+    .mt-pergunta-resposta {
+        margin-top: 76px;
+    }
+    .navbar {
+        margin-bottom: 25px !important;
+    }
+    .loginmodal-container {
+        padding: 30px;
+        max-width: 350px;
+        width: 100% !important;
+        background-color: #F7F7F7;
+        margin: 0 auto;
+        border-radius: 8px;
+        border: 1px #d9d9d9 solid;
+        overflow: hidden;
+        margin-top: 150px;
+    }
+}
+
+
+/****** LOGIN MODAL ******/
+
+.loginmodal-container {
+    padding: 30px;
+    max-width: 350px;
+    width: 100% !important;
+    background-color: #F7F7F7;
+    margin: 0 auto;
+    border-radius: 8px;
+    border: 1px #d9d9d9 solid;
+    overflow: hidden;
+    margin-top: 150px;
+}
+
+.loginmodal-container h1 {
+    text-align: center;
+}
+
+.loginmodal-container input[type=submit] {
+    width: 100%;
+    display: block;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.loginmodal-container input[type=text], .loginmodal-container input[type=password], .loginmodal-container input[type=email] {
+    height: 44px;
+    font-size: 16px;
+    width: 100%;
+    margin-bottom: 10px;
+    -webkit-appearance: none;
+    background: #fff;
+    border: 1px solid #d9d9d9;
+    border-top: 1px solid #c0c0c0;
+    padding: 0 8px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+
+.loginmodal-container input[type=text]:hover, .loginmodal-container input[type=password]:hover, .loginmodal-container input[type=email]:hover {
+    border: 1px solid #b9b9b9;
+    border-top: 1px solid #a0a0a0;
+    -moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.loginmodal-submit {
+    border: 0px;
+    color: #fff;
+    text-shadow: 0 1px rgba(0, 0, 0, 0.1);
+    background-color: #4d90fe;
+    padding: 17px 0px;
+    font-size: 14px;
+}
+
+.loginmodal-submit:hover {
+    border: 0px;
+    text-shadow: 0 1px rgba(0, 0, 0, 0.3);
+    background-color: #357ae8;
+}
+
+.loginmodal-container a {
+    text-decoration: none;
+    color: #666;
+    font-weight: 400;
+    text-align: center;
+    display: inline-block;
+    opacity: 0.6;
+    transition: opacity ease 0.5s;
+}
+
+.login-help {
+    font-size: 12px;
+}

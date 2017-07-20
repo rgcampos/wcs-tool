@@ -1,0 +1,26 @@
+<div class="container" ng-controller="chat" ng-init="load()">
+	<div id="bodybox" class="ng-cloak">
+		<div id="header" class="row">
+			<div class="col-sm-12 col-md-12">
+				&nbsp;
+			</div>
+		</div>
+
+		<div id="content" class="row">
+			<div id="contentChat" name="contentChat" class="col-sm-12 col-md-12">
+
+			</div>
+		</div>
+		<div id="form" class="row">
+			<div class="col-sm-12 col-md-12">
+				<form method="POST" name="form" ng-submit="formSubmit()">
+					<div class="input-group" style="line-height: 50px; align-items: center; display: flex;">
+						<input type="text" id="txtMessage" name="txtMessage" class="form-control" placeholder="{{placeholder}}" my-enter="formSubmit()"
+						 ng-model="txtMessage" ng-disabled="waitFeedback" autofocus required>&nbsp;
+						<button class="btn btn-primary" id="btnSend" name="btnSend" type="submit" ng-disabled="waitFeedback">Enviar</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
